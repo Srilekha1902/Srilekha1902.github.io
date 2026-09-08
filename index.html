@@ -54,13 +54,61 @@
   }
   .topbar .lv{
     color:var(--text-dim); font-size:12px;
+    flex-shrink:0;
   }
   .topbar .lv b{ color:var(--teal); }
+  .lv-bar-wrap{
+    flex:1;
+    height:6px;
+    background:var(--line);
+    margin:0 24px;
+    position:relative;
+    overflow:hidden;
+    border-radius:2px;
+  }
+  .lv-bar-fill{
+    position:absolute;
+    top:0; left:0; bottom:0;
+    width:10%;
+    background:linear-gradient(90deg, var(--teal) 0%, var(--gold) 100%);
+    transition:width .15s ease;
+  }
+  @media (max-width:480px){
+    .lv-bar-wrap{ margin:0 12px; }
+  }
 
-  .wrap{ max-width:720px; margin:0 auto; padding:0 20px; }
+  .wrap{ max-width:1100px; margin:0 auto; padding:0 20px; }
+  .wrap-narrow{ max-width:720px; margin:0 auto; padding:0 20px; }
 
-  /* hero */
-  .hero{ padding-top:44px; }
+  /* hero grid */
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:start;
+    padding-top:44px;
+    padding-bottom:56px;
+  }
+  @media (max-width:860px){
+    .hero-grid{ grid-template-columns:1fr; gap:36px; }
+  }
+  .hero-left .bio{ margin-bottom:32px; }
+  .hero-left .cta-row{ margin-bottom:0; max-width:none; flex-direction:row; flex-wrap:wrap; }
+  .hero-left .btn{ flex:0 0 auto; }
+
+  .stats-panel{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    padding:24px 24px 8px;
+  }
+  .stats-panel-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom:20px;
+    color:var(--gold);
+    font-size:12px;
+    letter-spacing:1.5px;
+  }
+  .stats-panel-head .active-tag{ color:var(--gold-dim); }
   .class-tag{
     display:inline-block;
     border:1px solid var(--gold-dim);
@@ -71,15 +119,16 @@
     margin-bottom:26px;
   }
   h1{
-    font-size:44px;
-    line-height:1.15;
+    font-family:'Press Start 2P', monospace;
+    font-size:30px;
+    line-height:1.5;
     margin:0 0 18px 0;
     background:linear-gradient(90deg, var(--gold) 0%, var(--teal) 100%);
     -webkit-background-clip:text;
     background-clip:text;
     color:transparent;
-    font-weight:700;
-    letter-spacing:-0.5px;
+    font-weight:400;
+    letter-spacing:0px;
   }
   .tagline{
     color:var(--teal);
@@ -121,7 +170,48 @@
   .section-head::after{
     content:''; flex:1; height:1px; background:var(--line);
   }
+  .section-title{
+    font-family:'Press Start 2P', monospace;
+    font-size:17px;
+    color:#fff;
+    font-weight:400;
+    margin:0 0 28px 0;
+    line-height:1.7;
+    max-width:56ch;
+  }
   section{ padding:36px 0; border-top:1px solid var(--line); }
+
+  .skill-branch-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+  }
+  @media (max-width:900px){
+    .skill-branch-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+  @media (max-width:560px){
+    .skill-branch-grid{ grid-template-columns:1fr; }
+  }
+  .skill-branch{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    padding:18px 20px;
+  }
+  .skill-branch-head{
+    color:var(--gold);
+    font-size:12px;
+    letter-spacing:1px;
+    margin-bottom:14px;
+  }
+  .skill-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size:13.5px; color:var(--text);
+    padding:7px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .skill-row:last-child{ border-bottom:none; }
+  .skill-level-tag{ font-size:11.5px; color:var(--text-dim); }
+  .skill-level-tag.advanced{ color:var(--teal); }
 
   /* stats */
   .stat{ margin-bottom:16px; }
@@ -150,6 +240,48 @@
   .level ul{ margin:0; padding-left:18px; color:var(--text-dim); font-size:14px; }
   .level li{ margin-bottom:6px; }
   .level li::marker{ color:var(--gold-dim); }
+  .level-summary{ color:var(--text-dim); font-size:13.5px; margin:6px 0 0; }
+  .level-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  @media (max-width:760px){
+    .level-grid{ grid-template-columns:1fr; }
+  }
+  .level-grid .level{ margin-bottom:0; }
+  .level-status{
+    display:inline-block;
+    font-size:10px;
+    letter-spacing:1px;
+    padding:3px 8px;
+    border-radius:3px;
+    margin-left:8px;
+    vertical-align:middle;
+  }
+  .level-status.cleared{ background:rgba(99,209,122,0.15); color:var(--green); }
+  .level-status.current{ background:rgba(232,168,56,0.15); color:var(--gold); }
+  .tag-chips{ display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 14px; }
+  .tag-chip{
+    font-size:11px;
+    color:var(--teal);
+    border:1px solid var(--line);
+    background:#0d1626;
+    padding:4px 10px;
+    border-radius:3px;
+  }
+  .level details summary{
+    cursor:pointer;
+    color:var(--teal);
+    font-size:13px;
+    list-style:none;
+    outline:none;
+    user-select:none;
+  }
+  .level details summary::-webkit-details-marker{ display:none; }
+  .level details summary::after{ content:' ▸'; }
+  .level details[open] summary::after{ content:' ▾'; }
+  .level details ul{ margin-top:12px; }
 
   /* achievements */
   .ach{
@@ -161,6 +293,38 @@
   .ach-icon{ color:var(--gold); font-size:16px; line-height:1.4; }
   .ach-text{ color:var(--text-dim); font-size:14px; }
   .ach-text b{ color:var(--text); font-weight:600; }
+  .ach-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+  }
+  @media (max-width:760px){
+    .ach-grid{ grid-template-columns:1fr; }
+  }
+  .ach-card{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    padding:20px;
+  }
+  .ach-card-icon{
+    display:inline-flex;
+    align-items:center; justify-content:center;
+    width:34px; height:34px;
+    border-radius:50%;
+    background:rgba(232,168,56,0.15);
+    color:var(--gold);
+    font-size:15px;
+    margin-bottom:14px;
+  }
+  .ach-card-title{ color:#fff; font-weight:700; font-size:14.5px; margin-bottom:4px; }
+  .ach-card-sub{ color:var(--text-dim); font-size:13px; }
+  .sub-label{
+    color:var(--teal);
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
 
   /* credibility strip */
   .strip{
@@ -179,7 +343,10 @@
   .strip-label{ color:var(--text-dim); font-size:11px; margin-top:4px; }
 
   /* AI tools */
-  .ai-grid{ display:flex; flex-direction:column; gap:14px; }
+  .ai-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
+  @media (max-width:760px){
+    .ai-grid{ grid-template-columns:1fr; }
+  }
   .ai-card{
     display:flex; gap:16px; align-items:flex-start;
     background:var(--bg-panel);
@@ -207,7 +374,7 @@
   }
 
   @media (max-width:480px){
-    h1{ font-size:32px; }
+    h1{ font-size:22px; }
     .topbar .tag{ font-size:9px; }
     .strip{ flex-direction:column; }
     .strip-cell{ border-right:none; border-bottom:1px solid var(--line); }
@@ -219,94 +386,126 @@
 
   <div class="topbar">
     <span class="tag pixel">S.S // CHARACTER SHEET</span>
-    <span class="lv">LV <b>1</b>/∞</span>
+    <div class="lv-bar-wrap"><div class="lv-bar-fill" id="lvBarFill"></div></div>
+    <span class="lv">LV <b>1</b>/10</span>
   </div>
 
   <div class="wrap">
 
-    <div class="hero">
-      <div class="class-tag">CLASS: AUTOMATION TESTER</div>
-      <h1>Srilekha<br>Shanmugam</h1>
-      <div class="tagline">Selenium <span class="sep">·</span> Java <span class="sep">·</span> TestNG <span class="sep">·</span> Cucumber <span class="sep">·</span> API Testing</div>
-      <p class="bio">QA Test Engineer with 4.7+ years across Healthcare and Digital Advertising, shipping releases with zero critical defects reaching production. I build Selenium + Java + Cucumber automation frameworks that survive past handoff, back them with API and database validation, and use AI tools to test faster without cutting corners.</p>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="class-tag">CLASS: AUTOMATION TESTER</div>
+        <h1>Srilekha<br>Shanmugam</h1>
+        <div class="tagline">Selenium <span class="sep">·</span> Java <span class="sep">·</span> TestNG <span class="sep">·</span> Cucumber <span class="sep">·</span> API Testing</div>
+        <p class="bio">QA Test Engineer with 4.7+ years across Healthcare and Digital Advertising, shipping releases with zero critical defects reaching production. I build Selenium + Java + Cucumber automation frameworks that survive past handoff, back them with API and database validation, and use AI tools to test faster without cutting corners.</p>
 
-      <div class="strip">
-        <div class="strip-cell"><div class="strip-num">4.7+</div><div class="strip-label">YEARS EXPERIENCE</div></div>
-        <div class="strip-cell"><div class="strip-num">600+</div><div class="strip-label">TEST CASES DESIGNED</div></div>
-        <div class="strip-cell"><div class="strip-num">50+</div><div class="strip-label">API ENDPOINTS TESTED</div></div>
-        <div class="strip-cell"><div class="strip-num">0</div><div class="strip-label">CRITICAL DEFECTS SHIPPED</div></div>
+        <div class="cta-row">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('levels').scrollIntoView({behavior:'smooth'})">View Levels (Experience)</button>
+          <a class="btn btn-outline" href="mailto:srilekhashanmugam9@gmail.com">Start a Quest (Contact)</a>
+        </div>
       </div>
 
-      <div class="cta-row">
-        <button type="button" class="btn btn-primary" onclick="document.getElementById('levels').scrollIntoView({behavior:'smooth'})">View Levels (Experience)</button>
-        <a class="btn btn-outline" href="mailto:srilekhashanmugam9@gmail.com">Start a Quest (Contact)</a>
+      <div class="stats-panel">
+        <div class="stats-panel-head">
+          <span>CHARACTER STATS</span>
+          <span class="active-tag">LV 2 · ACTIVE</span>
+        </div>
+        <div class="stat">
+          <div class="stat-top"><span class="stat-name">Test Automation (Selenium / Java / TestNG)</span><span class="stat-val">90</span></div>
+          <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="stat">
+          <div class="stat-top"><span class="stat-name">BDD Frameworks (Cucumber)</span><span class="stat-val">80</span></div>
+          <div class="bar"><div class="bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="stat">
+          <div class="stat-top"><span class="stat-name">Manual & Functional Testing</span><span class="stat-val">95</span></div>
+          <div class="bar"><div class="bar-fill gold" style="width:95%"></div></div>
+        </div>
+        <div class="stat">
+          <div class="stat-top"><span class="stat-name">API Testing (Postman / Swagger)</span><span class="stat-val">85</span></div>
+          <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="stat">
+          <div class="stat-top"><span class="stat-name">Database Validation (PostgreSQL)</span><span class="stat-val">75</span></div>
+          <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="stat">
+          <div class="stat-top"><span class="stat-name">Defect Management & Reporting</span><span class="stat-val">90</span></div>
+          <div class="bar"><div class="bar-fill gold" style="width:90%"></div></div>
+        </div>
       </div>
     </div>
 
-    <section id="stats">
-      <div class="section-head">STAT SHEET</div>
-      <div class="stat">
-        <div class="stat-top"><span class="stat-name">Test Automation (Selenium / Java / TestNG)</span><span class="stat-val">90</span></div>
-        <div class="bar"><div class="bar-fill" style="width:90%"></div></div>
-      </div>
-      <div class="stat">
-        <div class="stat-top"><span class="stat-name">BDD Frameworks (Cucumber)</span><span class="stat-val">80</span></div>
-        <div class="bar"><div class="bar-fill" style="width:80%"></div></div>
-      </div>
-      <div class="stat">
-        <div class="stat-top"><span class="stat-name">Manual & Functional Testing</span><span class="stat-val">95</span></div>
-        <div class="bar"><div class="bar-fill gold" style="width:95%"></div></div>
-      </div>
-      <div class="stat">
-        <div class="stat-top"><span class="stat-name">API Testing (Postman / Swagger)</span><span class="stat-val">85</span></div>
-        <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
-      </div>
-      <div class="stat">
-        <div class="stat-top"><span class="stat-name">Database Validation (PostgreSQL)</span><span class="stat-val">75</span></div>
-        <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
-      </div>
-      <div class="stat">
-        <div class="stat-top"><span class="stat-name">Defect Management & Reporting</span><span class="stat-val">90</span></div>
-        <div class="bar"><div class="bar-fill gold" style="width:90%"></div></div>
-      </div>
-    </section>
+    <div class="strip">
+      <div class="strip-cell"><div class="strip-num">4.7+</div><div class="strip-label">YEARS EXPERIENCE</div></div>
+      <div class="strip-cell"><div class="strip-num">600+</div><div class="strip-label">TEST CASES DESIGNED</div></div>
+      <div class="strip-cell"><div class="strip-num">50+</div><div class="strip-label">API ENDPOINTS TESTED</div></div>
+      <div class="strip-cell"><div class="strip-num">0</div><div class="strip-label">CRITICAL DEFECTS SHIPPED</div></div>
+    </div>
 
     <section id="levels">
       <div class="section-head">LEVELS CLEARED</div>
+      <h2 class="section-title">Experience — click a level to see the run details</h2>
 
+      <div class="level-grid">
       <div class="level">
         <div class="level-top">
-          <span class="level-badge">LEVEL 2 — CURRENT</span>
+          <span class="level-badge">LEVEL 2 <span class="level-status current">CURRENT</span></span>
           <span class="level-date">Nov 2024 – Present</span>
         </div>
         <h3>Humana Pharmacy</h3>
         <div class="role">Senior Test Analyst · Cognizant Technology Solutions</div>
-        <ul>
-          <li>Built and maintained a Selenium + Java automation framework with Page Object Model, TestNG, Cucumber (BDD), and Extent Reports.</li>
-          <li>Used Claude, GitHub Copilot, and ChatGPT daily to accelerate script development, debug failures, and draft documentation — see AI-Augmented Testing below.</li>
-          <li>Reduced defect leakage by 30% through end-to-end manual testing of pharmacy benefit workflows.</li>
-          <li>Validated 50+ API endpoints via Postman and Swagger, and ran PostgreSQL checks for backend data integrity.</li>
-        </ul>
+        <p class="level-summary">Owns end-to-end QA on a healthcare pharmacy platform — automation framework, API checks, and database validation.</p>
+        <div class="tag-chips">
+          <span class="tag-chip">Selenium</span>
+          <span class="tag-chip">Java</span>
+          <span class="tag-chip">TestNG</span>
+          <span class="tag-chip">Cucumber</span>
+          <span class="tag-chip">Postman</span>
+          <span class="tag-chip">PostgreSQL</span>
+        </div>
+        <details>
+          <summary>Run details</summary>
+          <ul>
+            <li>Built and maintained a Selenium + Java automation framework with Page Object Model, TestNG, Cucumber (BDD), and Extent Reports.</li>
+            <li>Used Claude, GitHub Copilot, and ChatGPT daily to accelerate script development, debug failures, and draft documentation — see AI-Augmented Testing below.</li>
+            <li>Reduced defect leakage by 30% through end-to-end manual testing of pharmacy benefit workflows.</li>
+            <li>Validated 50+ API endpoints via Postman and Swagger, and ran PostgreSQL checks for backend data integrity.</li>
+          </ul>
+        </details>
       </div>
 
       <div class="level">
         <div class="level-top">
-          <span class="level-badge">LEVEL 1 — CLEARED</span>
+          <span class="level-badge">LEVEL 1 <span class="level-status cleared">CLEARED</span></span>
           <span class="level-date">Jan 2022 – Nov 2024</span>
         </div>
         <h3>Google Ads Optimization Project</h3>
         <div class="role">QA Manual Test Engineer · Cognizant Technology Solutions</div>
-        <ul>
-          <li>Designed and executed 500+ manual test cases across ad targeting, bidding, and campaign performance features.</li>
-          <li>Ran functional, regression, smoke, and UAT cycles with zero critical bugs reaching production.</li>
-          <li>Documented 100+ defects with clear repro steps and severity ratings in Buganizer.</li>
-          <li>Built test plans, scenarios, and RTMs directly from requirements.</li>
-        </ul>
+        <p class="level-summary">Ran manual QA end to end on ad targeting and campaign features — test design, execution, and defect reporting.</p>
+        <div class="tag-chips">
+          <span class="tag-chip">Manual Testing</span>
+          <span class="tag-chip">Regression</span>
+          <span class="tag-chip">UAT</span>
+          <span class="tag-chip">Buganizer</span>
+        </div>
+        <details>
+          <summary>Run details</summary>
+          <ul>
+            <li>Designed and executed 500+ manual test cases across ad targeting, bidding, and campaign performance features.</li>
+            <li>Ran functional, regression, smoke, and UAT cycles with zero critical bugs reaching production.</li>
+            <li>Documented 100+ defects with clear repro steps and severity ratings in Buganizer.</li>
+            <li>Built test plans, scenarios, and RTMs directly from requirements.</li>
+          </ul>
+        </details>
+      </div>
       </div>
     </section>
 
     <section id="ai-testing">
       <div class="section-head">AI-AUGMENTED TESTING</div>
+      <h2 class="section-title">Faster testing, same bar for coverage</h2>
       <p class="bio" style="margin-bottom:22px;">I don't just run tests — I use AI tools daily to test faster and document better, without lowering the bar on coverage.</p>
       <div class="ai-grid">
         <div class="ai-card">
@@ -330,39 +529,118 @@
       </div>
     </section>
 
-    <section id="achievements">
-      <div class="section-head">ACHIEVEMENTS UNLOCKED</div>
-      <div class="ach">
-        <div class="ach-icon">★</div>
-        <div class="ach-text"><b>Upcoming Star Award</b> — Humana Pharmacy, for outstanding contributions to the QA team early into the project.</div>
-      </div>
-      <div class="ach">
-        <div class="ach-icon">★</div>
-        <div class="ach-text"><b>Zero critical defects</b> — independently owned end-to-end API and database testing for Humana Pharmacy across all release cycles.</div>
-      </div>
-      <div class="ach">
-        <div class="ach-icon">★</div>
-        <div class="ach-text"><b>25% faster bug turnaround</b> — recognized for defect documentation detailed enough to speed up fixes.</div>
-      </div>
-      <div class="ach">
-        <div class="ach-icon">★</div>
-        <div class="ach-text"><b>Google Cloud Digital Leader</b> — certified.</div>
-      </div>
-      <div class="ach">
-        <div class="ach-icon">★</div>
-        <div class="ach-text"><b>Selenium with Java</b> — certified.</div>
+    <section id="skills">
+      <div class="section-head">SKILL TREE</div>
+      <h2 class="section-title">Abilities unlocked across four branches</h2>
+      <div class="skill-branch-grid">
+        <div class="skill-branch">
+          <div class="skill-branch-head">◆ TEST AUTOMATION</div>
+          <div class="skill-row"><span>Selenium</span><span class="skill-level-tag advanced">Advanced</span></div>
+          <div class="skill-row"><span>Java</span><span class="skill-level-tag advanced">Advanced</span></div>
+          <div class="skill-row"><span>TestNG</span><span class="skill-level-tag advanced">Advanced</span></div>
+          <div class="skill-row"><span>Cucumber (BDD)</span><span class="skill-level-tag">Intermediate</span></div>
+        </div>
+        <div class="skill-branch">
+          <div class="skill-branch-head">◆ MANUAL & FUNCTIONAL</div>
+          <div class="skill-row"><span>Test Case Design</span><span class="skill-level-tag advanced">Advanced</span></div>
+          <div class="skill-row"><span>Regression Testing</span><span class="skill-level-tag advanced">Advanced</span></div>
+          <div class="skill-row"><span>UAT Cycles</span><span class="skill-level-tag advanced">Advanced</span></div>
+        </div>
+        <div class="skill-branch">
+          <div class="skill-branch-head">◆ API & DATABASE</div>
+          <div class="skill-row"><span>Postman / Swagger</span><span class="skill-level-tag advanced">Advanced</span></div>
+          <div class="skill-row"><span>PostgreSQL</span><span class="skill-level-tag">Intermediate</span></div>
+        </div>
+        <div class="skill-branch">
+          <div class="skill-branch-head">◆ AI-AUGMENTED TESTING</div>
+          <div class="skill-row"><span>Claude</span><span class="skill-level-tag advanced">Advanced</span></div>
+          <div class="skill-row"><span>GitHub Copilot</span><span class="skill-level-tag">Intermediate</span></div>
+          <div class="skill-row"><span>ChatGPT</span><span class="skill-level-tag">Intermediate</span></div>
+        </div>
       </div>
     </section>
 
-    <section id="contact" class="contact">
-      <div class="section-head">CONTACT</div>
-      <div class="contact-box">
-        Reach out at <a href="mailto:srilekhashanmugam9@gmail.com">srilekhashanmugam9@gmail.com</a><br>
-        Chennai, Tamil Nadu, India
+    <section id="achievements">
+      <div class="section-head">ACHIEVEMENTS UNLOCKED</div>
+      <h2 class="section-title">Wins, certifications & education</h2>
+
+      <div class="sub-label">Achievements</div>
+      <div class="ach-grid" style="margin-bottom:28px;">
+        <div class="ach-card">
+          <div class="ach-card-icon">★</div>
+          <div class="ach-card-title">Upcoming Star Award</div>
+          <div class="ach-card-sub">Humana Pharmacy — recognized early into the project for outstanding QA contributions.</div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-card-icon">★</div>
+          <div class="ach-card-title">Zero Critical Defects</div>
+          <div class="ach-card-sub">Independently owned end-to-end API and database testing for Humana Pharmacy across all release cycles.</div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-card-icon">★</div>
+          <div class="ach-card-title">25% Faster Bug Turnaround</div>
+          <div class="ach-card-sub">Recognized for defect documentation detailed enough to speed up fixes.</div>
+        </div>
       </div>
-      <div class="footer-note">B.E. Electronics & Communication Engineering — Paavai Engineering College, 2017–2021</div>
+
+      <div class="sub-label">Certifications</div>
+      <div class="ach-grid" style="margin-bottom:28px;">
+        <div class="ach-card">
+          <div class="ach-card-icon">GC</div>
+          <div class="ach-card-title">Google Cloud Digital Leader</div>
+          <div class="ach-card-sub">Certified.</div>
+        </div>
+        <div class="ach-card">
+          <div class="ach-card-icon">SJ</div>
+          <div class="ach-card-title">Selenium with Java</div>
+          <div class="ach-card-sub">Certified.</div>
+        </div>
+      </div>
+
+      <div class="sub-label">Education</div>
+      <div class="ach-grid">
+        <div class="ach-card">
+          <div class="ach-card-icon">EC</div>
+          <div class="ach-card-title">B.E. Electronics & Communication Engineering</div>
+          <div class="ach-card-sub">Paavai Engineering College, 2017–2021</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="final-quest" style="text-align:center; padding-top:60px;">
+      <div class="tag pixel" style="color:var(--teal); font-size:11px; letter-spacing:1.5px; margin-bottom:18px;">— SIDE QUEST: ACTIVELY HIRING?</div>
+      <h2 style="font-family:'Press Start 2P', monospace; font-size:19px; line-height:1.6; margin:0 0 20px 0; color:#fff;">Bugs don't stand a chance</h2>
+      <p class="bio" style="margin:0 auto 30px; text-align:center;">Open to QA Automation Testing and Manual Testing roles — in India and internationally.</p>
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+        <a class="btn btn-primary" style="display:inline-block;" href="mailto:srilekhashanmugam9@gmail.com">Email Me</a>
+        <a class="btn btn-outline" style="display:inline-block;" href="https://www.linkedin.com/in/srilekha-shanmugam-b572251a9" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-outline" style="display:inline-block;" href="https://github.com/srilekha1902" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <div class="footer-note">© 2026 Srilekha Shanmugam · Built from scratch, no build tools.</div>
     </section>
 
   </div>
+
+  <script>
+  (function () {
+    var levelEl = document.querySelector('.lv b');
+    var barEl = document.getElementById('lvBarFill');
+    if (!levelEl) return;
+    var maxLevel = 10;
+
+    function updateLevel() {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? scrollTop / docHeight : 0;
+      pct = Math.min(1, Math.max(0, pct));
+      var lvl = Math.min(maxLevel, Math.max(1, Math.ceil(pct * maxLevel)));
+      levelEl.textContent = lvl;
+      if (barEl) barEl.style.width = (pct * 100) + '%';
+    }
+
+    window.addEventListener('scroll', updateLevel);
+    updateLevel();
+  })();
+  </script>
 </body>
 </html>
